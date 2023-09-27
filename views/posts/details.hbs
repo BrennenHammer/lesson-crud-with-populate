@@ -1,1 +1,34 @@
 <h2>Post details page</h2>
+{{!-- posts/details.hbs --}}
+
+<h2>{{title}}</h2>
+<div>
+  {{content}}
+  <br>
+  - by {{author.username}} ♥️
+</div>
+<div>
+ 
+{{#unless comments}}
+  <p>No comments yet!</p>
+{{/unless}}
+ 
+{{#each comments}}
+  <p><b>{{author.username}}:</b> {{content}}</p>
+{{/each}}
+
+<h3>add comment</h3>
+
+<form action = '/comment/new/{{_id}}' method ="post"></form>
+<label> Your username:
+    <input type="text" name="author" />
+  </label>
+ 
+  <input type="text" name="postAuthor" value="{{author.username}}" hidden />
+  <textarea name="content" cols="30" rows="2"></textarea>
+ 
+  <button type="submit">Comment</button>
+</form>
+ 
+<br>
+<a href="/users/{{author._id}}/posts">See all {{author.username}}'s posts </a>

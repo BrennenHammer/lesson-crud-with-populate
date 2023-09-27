@@ -3,7 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
+let mongoose = require("mongoose")
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/user.routes');
 var postRouter = require("./routes/post.routes");
@@ -41,5 +41,13 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+mongoose
+  .connect(process.env.MONGODB_URI)
+  .then(x => {
+    console.log(`Connected to Mongo database: "${x.connections[0].name}"`);
+  })
+  .catch(err => {
+    console.log(`An error occurred while connecting to the Database: ${err}`);
+  });
 
 module.exports = app;

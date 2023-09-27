@@ -37,6 +37,14 @@ router.get("/users", (req, res) => {
     .then((usersFromDB) => res.render("users/list", { users: usersFromDB }))
     .catch((err) => console.log(`Error while getting users from the DB: ${err}`));
 });
+router.get("/users", (req, res, next) => {
+let {userId} = res.respond
+  User.findById(userId)
+  .populate("posts") // <-- .find() method gives us always an ARRAY back
+    .then((usersFromDB) => res.render("users/list", { users: usersFromDB }))
+    .catch((err) => console.log(`Error while getting users from the DB: ${err}`));
+});
+
 
 // ****************************************************************************************
 // GET details of a specific user (primarily their posts)

@@ -1,9 +1,17 @@
 const mongoose = require('mongoose');
+require('dotenv').config()
 
-const User = require('../models/User.model');
+const User = require('./models/User.model');
 
 // ℹ️ Connects to the database
-require("../db");
+mongoose
+  .connect(process.env.MONGODB_URI)
+  .then(x => {
+    console.log(`Connected to Mongo database: "${x.connections[0].name}"`);
+  })
+  .catch(err => {
+    console.log(`An error occurred while connecting to the Database: ${err}`);
+  });
 
 // User.collection.drop();
 

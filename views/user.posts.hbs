@@ -1,9 +1,8 @@
-<h2>Posts</h2>
- 
+<h2>{{username}}</h2>
 <ul>
   {{#each posts}}
     <li>
-        {{ this.title }} by {{this.author.username}}
+        <h3>{{ title }} by {{author.username}}</h3>
         <a href="/posts/details/{{this._id}}">Read more</a>
     </li>
   {{/each}}
